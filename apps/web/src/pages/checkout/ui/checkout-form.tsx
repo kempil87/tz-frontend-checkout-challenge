@@ -9,7 +9,7 @@ import { shouldOpenPayment, useCreateOrder } from '@/entities/order';
 import { ApiClientError } from '@/shared/api';
 import { AppRoutes, buildOrderPath, buildOrderPaymentPath } from '@/shared/config';
 import { applyApiFormErrors } from '@/shared/lib';
-import { Card, Typography } from '@/shared/ui';
+import { Card } from '@/shared/ui';
 
 import { checkoutFormSchema, type CheckoutFormValues } from '../model/checkout-form-schema';
 import { getCheckoutDelivery } from '../model/get-checkout-delivery';
@@ -188,11 +188,7 @@ export const CheckoutForm = ({ options }: CheckoutFormProps) => {
           <div className="flex min-w-0 flex-col gap-4">
             <Card>
               <Card.Header>
-                <div className="rounded-2xl bg-card-foreground px-3 py-3.5">
-                  <Typography id="delivery-heading" variant="h3">
-                    Доставка
-                  </Typography>
-                </div>
+                <Card.Title id="delivery-heading">Доставка</Card.Title>
               </Card.Header>
 
               <Card.Body>
@@ -232,11 +228,7 @@ export const CheckoutForm = ({ options }: CheckoutFormProps) => {
 
             <Card>
               <Card.Header>
-                <div className="rounded-2xl bg-card-foreground px-3 py-3.5">
-                  <Typography id="customer-heading" variant="h3">
-                    Контакты
-                  </Typography>
-                </div>
+                <Card.Title id="customer-heading">Контакты</Card.Title>
               </Card.Header>
 
               <Card.Body>
@@ -246,11 +238,7 @@ export const CheckoutForm = ({ options }: CheckoutFormProps) => {
 
             <Card>
               <Card.Header>
-                <div className="rounded-2xl bg-card-foreground px-3 py-3.5">
-                  <Typography id="payment-heading" variant="h3">
-                    Оплата
-                  </Typography>
-                </div>
+                <Card.Title id="payment-heading">Оплата</Card.Title>
               </Card.Header>
 
               <Card.Body>

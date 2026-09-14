@@ -1,7 +1,7 @@
 import type { Session } from '@checkout/contracts';
 
-import { instance } from '@/shared/api';
+import { api } from '@/shared/api';
 
 export const sessionApi = {
-  create: () => instance.post<Session>('/sessions', {}),
+  create: () => api.post<Session>('/sessions', {}),
 };

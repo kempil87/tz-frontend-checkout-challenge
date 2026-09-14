@@ -30,7 +30,7 @@ npm run generate:sprites -w @checkout/web
 
 ## Как устроен клиент
 
-Все HTTP-запросы идут через `shared/api` (`instance` на `fetch`). Там же: базовый URL, заголовки, `Authorization`, `Idempotency-Key`, разбор конверта `{ data }` / `{ error }`, 204 без `json()`. HTTP, сеть и битый JSON сводятся к `ApiClientError`; отмена запроса (`AbortError`) не оборачивается. 401 → новая сессия и повтор, 5xx → alert. Страницы не видят `Response` и не проверяют `ok`.
+Все HTTP-запросы идут через `shared/api` (`api` на `fetch`). Там же: базовый URL, заголовки, `Authorization`, `Idempotency-Key`, разбор конверта `{ data }` / `{ error }`, 204 без `json()`. HTTP, сеть и битый JSON сводятся к `ApiClientError`; отмена запроса (`AbortError`) не оборачивается. 401 → новая сессия и повтор, 5xx → alert. Страницы не видят `Response` и не проверяют `ok`.
 
 Слои (тонкий FSD):
 
@@ -38,6 +38,8 @@ npm run generate:sprites -w @checkout/web
 | ---------- | ----------------------------------------------------------------------- |
 | `app`      | роутер, провайдеры                                                      |
 | `pages`    | экраны и сборка сценария                                                |
+| `widgets`  | шапка, лейаут                                                           |
+| `features` | сессия и то, что на 2+ экранах                                          |
 | `entities` | доменные API и хуки (`product`, `cart`, `checkout`, `order`, `payment`) |
 | `shared`   | клиент, конфиг, UI, форматтеры                                          |
 
@@ -72,6 +74,5 @@ npm run generate:sprites -w @checkout/web
 ## Недоработки
 
 - Пункт выдачи на успехе показывается как «Самовывоз», без названия ПВЗ (в заказе только `pickupPointId`).
-- Неоплаченный заказ с главной сам не открывается: нужен URL `/orders/:id` или `/orders/:id/payment`.
 - Заголовок `Retry-After` у 202 не читаем: интервал опроса фиксированный 500 мс (в диапазоне задания).
-- Нет e2e на UI; HTTP-сценарии API — `npm run smoke` из корня.
+- Нет тестов;

@@ -276,14 +276,14 @@ export class ApiInstance {
   }
 }
 
-export const instance = new ApiInstance({
+export const api = new ApiInstance({
   baseURL: import.meta.env.VITE_API_URL ?? '',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-instance.interceptor.req((request) => {
+api.interceptor.req((request) => {
   const token = localStorage.getItem(StorageKeys.sessionToken);
 
   if (token) {
@@ -297,11 +297,11 @@ instance.interceptor.req((request) => {
   return request;
 });
 
-instance.interceptor.res(async (context) => {
+api.interceptor.res(async (context) => {
   const { error, request } = context;
 
   if (error?.status === 401 && request.path !== SESSION_PATH) {
-    const session = await instance.post<Session>(SESSION_PATH, {}, { skipRes: true });
+    const session = await api.post<Session>(SESSION_PATH, {}, { skipRes: true });
 
     localStorage.setItem(StorageKeys.sessionToken, session.token);
 

@@ -1,6 +1,7 @@
 import { useProducts } from '@/entities/product';
-import { ProductList } from '@/features/product/ui/product-list';
 import { Typography } from '@/shared/ui';
+
+import { ProductList } from './product-list';
 
 export const MainPage = () => {
   const { data: products = [], isPending, isError, error, refetch: onRetry } = useProducts();

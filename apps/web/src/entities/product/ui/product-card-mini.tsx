@@ -1,5 +1,5 @@
 import { amountFormat } from '@/shared/lib';
-import { Button, Checkbox, Icon, Typography } from '@/shared/ui';
+import { Checkbox, Icon, QuantityStepper, Typography } from '@/shared/ui';
 
 type CartQuantityProduct = {
   id: string;
@@ -77,31 +77,14 @@ export const ProductCardMini = ({
       </div>
 
       <div className="flex flex-col gap-1.5 max-lg:items-end">
-        <div className="flex items-center gap-2 sm:ml-auto">
-          <Button
-            aria-label="Уменьшить количество"
-            disabled={isLoading}
-            isIconOnly
-            onClick={handleRemoveQuantity}
-            size="md"
-            variant="secondary"
-          >
-            <Icon name="common:minus" />
-          </Button>
-
-          <Typography className="min-w-[2ch] max-w-[2ch] text-center">{quantity}</Typography>
-
-          <Button
-            aria-label="Увеличить количество"
-            disabled={isLoading || quantity >= stock}
-            isIconOnly
-            onClick={handleAddQuantity}
-            size="md"
-            variant="secondary"
-          >
-            <Icon name="common:plus" />
-          </Button>
-        </div>
+        <QuantityStepper
+          className="sm:ml-auto"
+          disabled={isLoading}
+          increaseDisabled={quantity >= stock}
+          onDecrease={handleRemoveQuantity}
+          onIncrease={handleAddQuantity}
+          value={quantity}
+        />
 
         <Typography variant="small" className="lg:text-center">
           {amountFormat(unitPrice)}/ед

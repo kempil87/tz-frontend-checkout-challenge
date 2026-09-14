@@ -1,4 +1,3 @@
-export { orderApi } from './api/order-api';
 export { getOrderDeliveryText } from './model/get-order-delivery-text';
 export { shouldOpenPayment } from './model/should-open-payment';
 export { useCreateOrder } from './model/use-create-order';

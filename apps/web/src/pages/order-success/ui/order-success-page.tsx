@@ -3,16 +3,8 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { useInvalidateCheckoutOptions } from '@/entities/checkout';
 import { getOrderDeliveryText, OrderItemRow, shouldOpenPayment, useOrder } from '@/entities/order';
 import { AppRoutes, buildOrderPaymentPath } from '@/shared/config';
-import { amountFormat } from '@/shared/lib';
+import { amountFormat, amountOrFree } from '@/shared/lib';
 import { AppLoader, Button, Card, SummaryRow, Typography } from '@/shared/ui';
-
-const getShippingLabel = (shipping: number) => {
-  if (shipping === 0) {
-    return 'Бесплатно';
-  }
-
-  return amountFormat(shipping);
-};
 
 export const OrderSuccessPage = () => {
   const { orderId } = useParams();
@@ -44,7 +36,7 @@ export const OrderSuccessPage = () => {
 
       <Card>
         <Card.Header>
-          <Typography variant="h3">Состав заказа</Typography>
+          <Card.Title>Состав заказа</Card.Title>
         </Card.Header>
 
         <Card.Body>
@@ -61,7 +53,7 @@ export const OrderSuccessPage = () => {
           <SummaryRow
             label={getOrderDeliveryText(order.delivery)}
             labelTone="muted"
-            value={getShippingLabel(order.shipping)}
+            value={amountOrFree(order.shipping)}
           />
 
           <Typography variant="h2">Итого {amountFormat(order.total)}</Typography>

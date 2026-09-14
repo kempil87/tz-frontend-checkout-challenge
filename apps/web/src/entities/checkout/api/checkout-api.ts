@@ -1,11 +1,11 @@
 import type { CheckoutOptions, CreateQuote, Quote } from '@checkout/contracts';
 
-import { instance } from '@/shared/api';
+import { api } from '@/shared/api';
 
 export const checkoutApi = {
-  getOptions: () => instance.get<CheckoutOptions>('/checkout/options'),
+  getOptions: () => api.get<CheckoutOptions>('/checkout/options'),
 
-  createQuote: (body: CreateQuote) => instance.post<Quote>('/quotes', body),
+  createQuote: (body: CreateQuote) => api.post<Quote>('/quotes', body),
 
-  getQuote: (quoteId: string) => instance.get<Quote>(`/quotes/${quoteId}`),
+  getQuote: (quoteId: string) => api.get<Quote>(`/quotes/${quoteId}`),
 };

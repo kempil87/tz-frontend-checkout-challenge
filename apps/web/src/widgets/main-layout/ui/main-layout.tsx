@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { AppHeader } from '@/widgets';
+import { AppHeader } from '@/widgets/app-header';
 
 export const MainLayout = () => {
   return (

@@ -1,8 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import { useCartQuantity } from '@/entities/cart';
-import { Product, ProductCard } from '@/entities/product';
-import { ProductCardSkeleton } from '@/entities/product/ui/product-card-skeleton';
+import { Product, ProductCard, ProductCardSkeleton } from '@/entities/product';
 import { Button, Typography } from '@/shared/ui';
 
 interface ProductListProps {

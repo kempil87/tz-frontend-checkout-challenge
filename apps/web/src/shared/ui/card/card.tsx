@@ -1,6 +1,8 @@
-import { type ComponentPropsWithoutRef, type ElementType } from 'react';
+import { type ComponentPropsWithoutRef, type ElementType, type ReactNode } from 'react';
 
 import { cn } from '@/shared/lib';
+
+import { Typography, type TypographyProps } from '../typography';
 
 type CardRootProps<T extends ElementType = 'article'> = {
   as?: T;
@@ -30,10 +32,46 @@ const CardRoot = <T extends ElementType = 'article'>({
   return <Component className={cn('rounded-3xl bg-layout', className)} {...props} />;
 };
 
+type CardTitleProps = {
+  children: ReactNode;
+  id?: string;
+};
+
+export const CardTitle = ({ children, id }: CardTitleProps) => {
+  return (
+    <div className="rounded-2xl bg-card-foreground px-3 py-3.5">
+      <Typography id={id} variant="h3">
+        {children}
+      </Typography>
+    </div>
+  );
+};
+
+type CardTotalProps = {
+  tone?: TypographyProps['tone'];
+  value: string;
+};
+
+export const CardTotal = ({ tone, value }: CardTotalProps) => {
+  return (
+    <CardFooter className="flex-row items-center justify-between gap-4">
+      <Typography as="span" variant="h2">
+        Итого
+      </Typography>
+
+      <Typography as="span" tone={tone} variant="price">
+        {value}
+      </Typography>
+    </CardFooter>
+  );
+};
+
 type CardComponent = typeof CardRoot & {
   Body: typeof CardBody;
   Footer: typeof CardFooter;
   Header: typeof CardHeader;
+  Title: typeof CardTitle;
+  Total: typeof CardTotal;
 };
 
 export const Card = CardRoot as CardComponent;
@@ -41,3 +79,5 @@ export const Card = CardRoot as CardComponent;
 Card.Body = CardBody;
 Card.Footer = CardFooter;
 Card.Header = CardHeader;
+Card.Title = CardTitle;
+Card.Total = CardTotal;

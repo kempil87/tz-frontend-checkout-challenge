@@ -1,8 +1,8 @@
 export {
+  api,
   ApiClientError,
   type ApiErrorField,
   ApiInstance,
   type ApiInstanceConfig,
   type ApiRequestConfig,
-  instance,
-} from './instance';
+} from './api';

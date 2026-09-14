@@ -1,8 +1,8 @@
 import { HTMLAttributes } from 'react';
 
-import { cn } from '@/shared/lib/cn';
+import { cn } from '@/shared/lib';
 
-import { Icon } from '../icon/icon';
+import { Icon } from '../icon';
 
 export interface AppLoaderProps extends HTMLAttributes<HTMLDivElement> {
   isStetched?: boolean;

@@ -1,6 +1,6 @@
 import { type SVGProps } from 'react';
 
-import { cn } from '@/shared/lib/cn';
+import { cn } from '@/shared/lib';
 
 import { type SpritePrepareConfig, sprites, type SpritesMeta } from './sprite.gen';
 

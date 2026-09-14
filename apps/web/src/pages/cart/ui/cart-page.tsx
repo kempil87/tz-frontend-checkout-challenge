@@ -4,8 +4,17 @@ import { Link } from 'react-router-dom';
 import { useCart, useCartQuantity } from '@/entities/cart';
 import { ProductCardMini, useProducts } from '@/entities/product';
 import { AppRoutes } from '@/shared/config';
-import { amountFormat, cn, pluralize } from '@/shared/lib';
-import { AppLoader, Button, Card, Checkbox, Icon, Typography } from '@/shared/ui';
+import { amountFormat, pluralize } from '@/shared/lib';
+import {
+  AppLoader,
+  BusyCard,
+  Button,
+  Card,
+  Checkbox,
+  Icon,
+  SummaryRow,
+  Typography,
+} from '@/shared/ui';
 
 const FALLBACK_STOCK = 99;
 
@@ -129,9 +138,7 @@ export const CartPage = () => {
 
           <Card>
             <Card.Header>
-              <div className="bg-card-foreground rounded-2xl px-3 py-3.5">
-                <Typography variant="h3">Доступны для заказа</Typography>
-              </div>
+              <Card.Title>Доступны для заказа</Card.Title>
             </Card.Header>
 
             <Card.Body>
@@ -154,17 +161,7 @@ export const CartPage = () => {
           </Card>
         </div>
 
-        <Card
-          className={cn(
-            'relative lg:sticky lg:top-24 transition-opacity duration-300 ease-in-out',
-            {
-              'opacity-50': isFetching,
-            },
-          )}
-          as="aside"
-        >
-          {isFetching && <AppLoader className="absolute inset-0" isStetched />}
-
+        <BusyCard as="aside" isBusy={isFetching} sticky>
           <Card.Header className="gap-4.5">
             <Button asChild className="w-full" disabled={selectedIds.length === 0} size="lg">
               <Link to={AppRoutes.checkout}>Перейти к оформлению</Link>
@@ -176,25 +173,16 @@ export const CartPage = () => {
           </Card.Header>
 
           <Card.Body>
-            <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
-              <Typography tone="muted">Ваша корзина</Typography>
-
-              <Typography variant="small">
-                {cart.quantity} {pluralize(cart.quantity, ['товар', 'товара', 'товаров'])}
-              </Typography>
-            </div>
+            <SummaryRow
+              className="border-b border-border pb-4"
+              label="Ваша корзина"
+              labelTone="muted"
+              value={`${cart.quantity} ${pluralize(cart.quantity, ['товар', 'товара', 'товаров'])}`}
+            />
           </Card.Body>
 
-          <Card.Footer className="flex-row items-center justify-between gap-4">
-            <Typography as="span" variant="h2">
-              Итого
-            </Typography>
-
-            <Typography as="span" tone="success" variant="price">
-              {amountFormat(cart.subtotal)}
-            </Typography>
-          </Card.Footer>
-        </Card>
+          <Card.Total tone="success" value={amountFormat(cart.subtotal)} />
+        </BusyCard>
       </div>
     </section>
   );

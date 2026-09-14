@@ -5,7 +5,7 @@ import { sessionLoader } from '@/features/session';
 import { RouteErrorPage } from '@/pages/error';
 import { AppRoutes } from '@/shared/config';
 import { AppLoader } from '@/shared/ui';
-import { MainLayout } from '@/widgets/main-layout/ui/main-layout';
+import { MainLayout } from '@/widgets/main-layout';
 
 import { RootLayout } from './root-layout';
 
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
             path: AppRoutes.main,
             element: withSuspense(
               lazy(() =>
-                import('@/pages/main/ui/main-page').then((m) => ({
+                import('@/pages/main').then((m) => ({
                   default: m.MainPage,
                 })),
               ),

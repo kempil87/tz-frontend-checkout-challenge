@@ -1,7 +1,7 @@
 import type { Product } from '@checkout/contracts';
 
-import { instance } from '@/shared/api';
+import { api } from '@/shared/api';
 
 export const productApi = {
-  list: () => instance.get<Product[]>('/products'),
+  list: () => api.get<Product[]>('/products'),
 };

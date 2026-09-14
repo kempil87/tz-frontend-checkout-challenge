@@ -1,7 +1,7 @@
 import type { Product } from '@checkout/contracts';
 
 import { amountFormat } from '@/shared/lib';
-import { Button, Icon, Typography } from '@/shared/ui';
+import { Button, Icon, QuantityStepper, Typography } from '@/shared/ui';
 
 type ProductCardProps = {
   product: Product;
@@ -18,7 +18,21 @@ export const ProductCard = ({
   onAddQuantity,
   onRemoveQuantity,
 }: ProductCardProps) => {
-  const onAddInCart = () => !quantityInCart && onAddQuantity(product);
+  const handleAddInCart = () => {
+    if (quantityInCart) {
+      return;
+    }
+
+    onAddQuantity(product);
+  };
+
+  const handleAddQuantity = () => {
+    onAddQuantity(product);
+  };
+
+  const handleRemoveQuantity = () => {
+    onRemoveQuantity(product);
+  };
 
   const getMainButtonText = () => {
     if (!product.stock) {
@@ -59,12 +73,12 @@ export const ProductCard = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-2 flex-row items-center">
+        <div className="flex flex-row items-center gap-2">
           <Button
             size="lg"
             className="grow"
             isLoading={isLoading}
-            onClick={onAddInCart}
+            onClick={handleAddInCart}
             disabled={!product.stock}
             variant={quantityInCart ? 'success' : 'primary'}
           >
@@ -72,33 +86,14 @@ export const ProductCard = ({
           </Button>
 
           {quantityInCart > 0 && (
-            <div className="flex items-center justify-center gap-2 sm:justify-start">
-              <Button
-                aria-label="Уменьшить количество"
-                isIconOnly
-                disabled={isLoading}
-                onClick={() => onRemoveQuantity(product)}
-                size="lg"
-                variant="secondary"
-              >
-                <Icon name="common:minus" />
-              </Button>
-
-              <Typography className="max-w-[2ch] min-w-[2ch] text-center">
-                {quantityInCart}
-              </Typography>
-
-              <Button
-                aria-label="Увеличить количество"
-                isIconOnly
-                disabled={isLoading}
-                onClick={() => onAddQuantity(product)}
-                size="lg"
-                variant="secondary"
-              >
-                <Icon name="common:plus" />
-              </Button>
-            </div>
+            <QuantityStepper
+              disabled={isLoading}
+              increaseDisabled={quantityInCart >= product.stock}
+              onDecrease={handleRemoveQuantity}
+              onIncrease={handleAddQuantity}
+              size="lg"
+              value={quantityInCart}
+            />
           )}
         </div>
       </div>

@@ -47,7 +47,7 @@ export const ProductCardMini = ({
 
   return (
     <article className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-      <div className="flex items-center gap-2 items-start lg:grow">
+      <div className="flex items-center gap-2 items-start sm:grow">
         <div
           className="relative flex size-20 shrink-0 items-center justify-center rounded-2xl bg-secondary before:absolute before:left-0 before:top-0 before:size-6 before:rounded-br-lg before:bg-card"
           aria-hidden
@@ -76,7 +76,7 @@ export const ProductCardMini = ({
         </Typography>
       </div>
 
-      <div className="flex flex-col gap-1.5 max-lg:items-end">
+      <div className="flex sm:flex-col gap-1.5 items-center lg:items-end">
         <QuantityStepper
           className="sm:ml-auto"
           disabled={isLoading}

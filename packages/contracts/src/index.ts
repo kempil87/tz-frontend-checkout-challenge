@@ -202,14 +202,18 @@ export const IdempotencyHeaders = Type.Object({
 });
 
 export type Product = Static<typeof ProductSchema>;
+export type Session = Static<typeof SessionSchema>;
 export type Cart = Static<typeof CartSchema>;
 export type Delivery = Static<typeof DeliverySchema>;
 export type Customer = Static<typeof CustomerSchema>;
+export type CheckoutOptions = Static<typeof CheckoutOptionsSchema>;
 export type Quote = Static<typeof QuoteSchema>;
+export type CreateQuote = Static<typeof QuoteBody>;
 export type Order = Static<typeof OrderSchema>;
 export type Payment = Static<typeof PaymentSchema>;
 export type Simulation = Static<typeof SimulationSchema>;
 export type Scenario = Static<typeof SimulateBody>['scenario'];
 export type CreateOrder = Static<typeof CreateOrderBody>;
+export type Sandbox = Static<typeof SandboxSchema>;
 export type ApiResult<T> = { data: T; meta: { requestId: string }; links: Static<typeof Links> };
 export type ApiError = Static<typeof ErrorResponse>;

@@ -1,6 +1,7 @@
 import type { Quote } from '@checkout/contracts';
 
-import { amountFormat, amountOrFree, pluralize } from '@/shared/lib';
+import { getCartQuantityLabel } from '@/entities/cart';
+import { amountFormat, amountOrFree } from '@/shared/lib';
 import { BusyCard, Button, Card, SummaryRow, Typography } from '@/shared/ui';
 
 type CheckoutAsideProps = {
@@ -44,7 +45,7 @@ export const CheckoutAside = ({
 
       <Card.Body className="gap-3">
         <SummaryRow
-          label={`${cartQuantity} ${pluralize(cartQuantity, ['товар', 'товара', 'товаров'])}`}
+          label={getCartQuantityLabel(cartQuantity)}
           labelTone="muted"
           value={amountFormat(quote?.subtotal ?? cartSubtotal)}
         />

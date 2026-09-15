@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useCart, useCartQuantity } from '@/entities/cart';
+import { getCartQuantityLabel, useCart, useCartQuantity } from '@/entities/cart';
 import { ProductCardMini, useProducts } from '@/entities/product';
 import { AppRoutes } from '@/shared/config';
-import { amountFormat, pluralize } from '@/shared/lib';
+import { amountFormat } from '@/shared/lib';
 import {
   AppLoader,
   BusyCard,
@@ -177,7 +177,7 @@ export const CartPage = () => {
               className="border-b border-border pb-4"
               label="Ваша корзина"
               labelTone="muted"
-              value={`${cart.quantity} ${pluralize(cart.quantity, ['товар', 'товара', 'товаров'])}`}
+              value={getCartQuantityLabel(cart.quantity)}
             />
           </Card.Body>
 

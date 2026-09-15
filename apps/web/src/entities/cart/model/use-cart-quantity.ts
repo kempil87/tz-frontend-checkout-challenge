@@ -57,7 +57,7 @@ export const useCartQuantity = () => {
   const isUpdating = (productId: string) => {
     return (
       (isAdding && setItemVars?.productId === productId) ||
-      (isRemoving && removeItemIds?.includes(productId))
+      (isRemoving && new Set(removeItemIds)?.has(productId))
     );
   };
 
